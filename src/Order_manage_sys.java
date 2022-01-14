@@ -113,7 +113,7 @@ public class Order_manage_sys {
                     System.out.println("商品单价:" + rs.getFloat("goods_price"));
                     System.out.println("-----------");
                     judge++;
-                }
+                }//
                 if (judge == 0) {
                     System.out.println("订单不存在，查询失败");
                 }

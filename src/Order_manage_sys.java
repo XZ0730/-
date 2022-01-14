@@ -116,9 +116,12 @@ public class Order_manage_sys {
             } else {//输入true进入
                 con = JDBCUtils_0.getConnection();
                 //使用?占位符代替参数
-                String sql = "SELECT * FROM order_information limit 0,5";
+                String sql = "SELECT * FROM order_information limit ?,5";
                 //预编译SQL，先写SQL，然后不执行
                 st = con.prepareStatement(sql);
+                System.out.println("输入你要查询的页码：");
+                int number1 = sc.nextInt();
+                st.setInt(1,(number1-1)*5);
                 rs = st.executeQuery();
                 //判断订单是否存在
                 while (rs.next()) {

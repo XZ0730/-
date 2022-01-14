@@ -119,7 +119,7 @@ public class Order_manage_sys {
                 String sql = "SELECT * FROM order_information limit ?,5";
                 //预编译SQL，先写SQL，然后不执行
                 st = con.prepareStatement(sql);
-                System.out.println("输入你要查询的页码：");//
+                System.out.println("输入你要查询的页码：");
                 int number1 = sc.nextInt();
                 st.setInt(1,(number1-1)*5);
                 rs = st.executeQuery();

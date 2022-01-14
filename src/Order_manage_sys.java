@@ -95,7 +95,7 @@ public class Order_manage_sys {
             if (!sc.nextBoolean()) {//输入false进入
                 con = JDBCUtils_0.getConnection();
                 //使用?占位符代替参数
-                String sql = "SELECT * FROM order_information WHERE order_id=?";
+                String sql = "SELECT * FROM order_information rd ,goods_information gi where rd.goods_id = gi.goods_id and order_id=?";
                 //预编译SQL，先写SQL，然后不执行
                 st = con.prepareStatement(sql);
                 System.out.println("请输入你要查询的订单号：");
@@ -105,9 +105,13 @@ public class Order_manage_sys {
                 //判断订单是否存在
                 int judge = 0;
                 while (rs.next()) {
+                    System.out.println("-----------");
                     System.out.println("订单号：" + rs.getInt("order_id"));
                     System.out.println("商品编号：" + rs.getString("goods_id"));
-                    System.out.println("订单时间：" + rs.getDate("order_time"));
+                    System.out.println("下单日期：" + rs.getDate("order_time"));
+                    System.out.println("商品名称：" + rs.getString("goods_name"));
+                    System.out.println("商品单价:" + rs.getFloat("goods_price"));
+                    System.out.println("-----------");
                     judge++;
                 }
                 if (judge == 0) {
@@ -116,7 +120,7 @@ public class Order_manage_sys {
             } else {//输入true进入
                 con = JDBCUtils_0.getConnection();
                 //使用?占位符代替参数
-                String sql = "SELECT * FROM order_information limit ?,5";
+                String sql = "SELECT * FROM order_information rd ,goods_information gi where rd.goods_id = gi.goods_id limit ?,5";
                 //预编译SQL，先写SQL，然后不执行
                 st = con.prepareStatement(sql);
                 System.out.println("输入你要查询的页码：");
@@ -125,9 +129,13 @@ public class Order_manage_sys {
                 rs = st.executeQuery();
                 //判断订单是否存在
                 while (rs.next()) {
+                    System.out.println("-----------");
                     System.out.println("订单号：" + rs.getInt("order_id"));
                     System.out.println("商品编号：" + rs.getString("goods_id"));
                     System.out.println("下单日期：" + rs.getDate("order_time"));
+                    System.out.println("商品名称：" + rs.getString("goods_name"));
+                    System.out.println("商品单价:" + rs.getFloat("goods_price"));
+                    System.out.println("-----------");
                 }
             }
         } catch (SQLException e) {
